@@ -1,3 +1,13 @@
+.mvn/
+File1
+Makefile
+SQL_Hints
+commands
+vnw
+vnw.cmd
+pgdata/
+odana.yaml
+
 HELP.md
 target/
 !.mvn/wrapper/maven-wrapper.jar
