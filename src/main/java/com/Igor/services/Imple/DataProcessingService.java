@@ -1,9 +1,8 @@
 package com.Igor.services.Imple;
 
+import com.Igor.dto.FilterDTO;
 import com.Igor.dto.UserDTO;
-import com.Igor.model.QDeviceType;
-import com.Igor.model.QRegistry;
-import com.Igor.model.Registry;
+import com.Igor.model.*;
 import com.Igor.repository.RegistryRepository;
 import com.Igor.services.Interf.IProductService;
 import com.querydsl.core.BooleanBuilder;
@@ -12,8 +11,8 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import java.util.List;
 
@@ -21,7 +20,6 @@ import java.util.List;
 public class DataProcessingService implements IProductService {
     @PersistenceContext
     private EntityManager em;
-
     public DataProcessingService() {}
 
     @Override
@@ -52,9 +50,16 @@ public class DataProcessingService implements IProductService {
         return query.selectFrom(qRegistry).leftJoin(qRegistry.deviceType, deviceType).where(builder).fetch();
     }
 
-    public List<Registry> getFilteredData(){
-//        List<Registry> one = new JPAQuery<Registry>(em);
+    // todo: протестировать этот метод
+    @Transactional
+    public List<Models> getFilteredData(FilterDTO data){
+        List<Models> one = new JPAQuery<Registry>(em).select(QModels.models).
+                from(QModels.models).
+                where(QModels.models.deviceType.name.eq(data.getDeviceType()).
+                        and(QModels.models.color.eq(data.getColor())).
+                        and(QModels.models.price.between(data.getLowPriceThreshold(), data.getHighPriceThreshold())))
+                .fetch();
 
-        return null;
+        return one;
     }
 }

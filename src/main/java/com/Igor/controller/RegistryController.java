@@ -1,12 +1,13 @@
 package com.Igor.controller;
 
+import com.Igor.dto.FilterDTO;
 import com.Igor.dto.UserDTO;
 import com.Igor.exception.ResourceNotFoundException;
+import com.Igor.model.Models;
 import com.Igor.model.Registry;
 import com.Igor.repository.RegistryRepository;
 
 import com.Igor.services.Imple.DataProcessingService;
-import com.Igor.services.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.ResponseEntity;
@@ -17,10 +18,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/regController/")
 public class RegistryController {
-
-    @Autowired
-    TestService one;
-
     @Autowired
     private RegistryRepository registryRepository;
 
@@ -36,10 +33,9 @@ public class RegistryController {
     }
 
     @PostMapping("filteredProducts")
-    public List<Registry> getFilteredProducts(){
-//        List<Registry> one = dataProcessingService;
-
-        return null;
+    public List<Models> getFilteredProducts(@RequestBody FilterDTO data){
+        List<Models> one = dataProcessingService.getFilteredData(data);
+        return one;
     }
 
     // ---------------------Not needed---------------------
