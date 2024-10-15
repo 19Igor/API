@@ -10,13 +10,6 @@ public class Registry{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-//    @Column(name = "device_type_id")
-//    private Integer deviceTypeId;
-
-    /**
-     * Пробую сделать как в репозитории. Может быть получится.
-     * https://github.com/okihouse/spring-jpa-querydsl-sample/blob/master/src/main/java/com/boot/jpa/domain/User.java
-     * */
     @ManyToOne()
     @JoinColumn(name = "device_type_id")
     private DeviceType deviceType;
@@ -35,15 +28,12 @@ public class Registry{
     private List<Integer> models;
 
     public Registry() {}
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public DeviceType getDeviceTypeId() { return deviceType; }
+
+    public Long getId() {
+        return id;
+    }
 
     public void setDeviceTypeId(DeviceType deviceTypeId) {
         this.deviceType = deviceTypeId;
@@ -88,3 +78,4 @@ public class Registry{
         this.installmentAvailable = installmentAvailable;
     }
 }
+

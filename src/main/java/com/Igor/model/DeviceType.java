@@ -11,8 +11,6 @@ public class DeviceType {
     @Column(name = "name")
     private String name;
 
-    //-------------------------------------------------
-
     public DeviceType() {}
 
     public String getName() {

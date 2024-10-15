@@ -3,7 +3,7 @@ package com.Igor.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class UserDTO {
-    private int productType;
+    private String productType;
     private String country;
     private String company;
     @JsonProperty("isOnline")
@@ -27,11 +27,11 @@ public class UserDTO {
         isInstallment = installment;
     }
 
-    public int getProductType() {
+    public String getProductType() {
         return productType;
     }
 
-    public void setProductType(int productType) {
+    public void setProductType(String productType) {
         this.productType = productType;
     }
 

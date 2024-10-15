@@ -12,14 +12,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import jakarta.persistence.*;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/regController/")
 public class RegistryController {
-    @PersistenceContext
-    private EntityManager em;
+
     @Autowired
     TestService one;
 
@@ -32,21 +30,14 @@ public class RegistryController {
         this.dataProcessingService = one;
     }
 
-//    @GetMapping("products")
-//    public List<Registry> getAllProducts(){
-//        QRegistry qRegistry = QRegistry.registry;
-//        JPAQuery<Registry> query = new JPAQuery<>(em);
-//        return query.select(qRegistry).from(qRegistry).fetch();
-//    }
-
-    @PostMapping("getProductsByProductTypeCountryCompanyOnlineInstallment")
+    @PostMapping("getProductsByOptions")
     public List<Registry> getSpecifiedProducts(@RequestBody UserDTO userData){
-        return dataProcessingService.searchByParametrs(userData);
+        return dataProcessingService.searchByParameters(userData);
     }
 
-    @PostMapping("fillterProducts")
+    @PostMapping("filteredProducts")
     public List<Registry> getFilteredProducts(){
-
+//        List<Registry> one = dataProcessingService;
 
         return null;
     }
